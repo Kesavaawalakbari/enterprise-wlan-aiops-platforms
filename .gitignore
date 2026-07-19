@@ -1,0 +1,10 @@
+# Folder dependensi aplikasi
+backend/__pycache__/
+frontend/node_modules/
+
+# Data lokal dari database (Wajib di-ignore agar server tidak berat)
+database/data/
+
+# File konfigurasi sensitif / rahasia
+.env
+*.log
