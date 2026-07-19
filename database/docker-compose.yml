@@ -1,0 +1,27 @@
+services:
+  database:
+    image: postgres:${POSTGRES_VERSION}-alpine
+    container_name: aiops_postgres
+    restart: always
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "${POSTGRES_PORT}:5432"
+    volumes:
+      - pg_aiops_data:/var/lib/postgresql/data
+      - ./init:/docker-entrypoint-initdb.d
+      - ./backup:/var/lib/postgresql/backup
+    networks:
+      - aiops_network
+
+volumes:
+  pg_aiops_data:
+    external: true
+    name: pg_aiops_data
+
+networks:
+  aiops_network:
+    external: true
+    name: aiops_network
